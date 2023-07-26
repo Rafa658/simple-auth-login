@@ -48,3 +48,14 @@ app.post('/user', async(req, res) => {
         res.status(400)
     }
 })
+app.post('/changepassword', async(req, res) => {
+    var stat = await UserService.ChangePassword(req)
+
+    if (stat) {
+        res.send("Password changed with success")
+        res.status(200)
+    } else {
+        res.send("There was an error changing password")
+        res.status(400)
+    }
+})

@@ -34,6 +34,21 @@ class UserService {
             return false
         }
     }
+
+    async ChangePassword(req) {
+        const user = {"email": req.body.email, "password": req.body.password}
+        const find = await( await User.find(user)).length
+        if (!find) return false
+
+        // const oldPass = req.body.password
+        const newPass = req.body.newpassword
+        const filter = {"email": req.body.email}
+        const update = {"password": newPass}
+        const stat = await User.updateOne(filter, update)
+
+        return true
+
+    }
 }
 
 module.exports = new UserService()
