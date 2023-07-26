@@ -12,6 +12,13 @@ class UserService {
             return []
         }
     }
+
+    async FindOne(user) {
+        const find = await User.findOne(user)
+        if (find) return true
+        
+        return false
+    }
 }
 
 module.exports = new UserService()
