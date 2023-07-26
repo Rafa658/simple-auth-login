@@ -19,6 +19,21 @@ class UserService {
         
         return false
     }
+
+    async Add(user) {
+        if (!user.email || !user.password) return false
+
+        let findEmail = await(await User.find({"email": user.email})).length
+        if (findEmail) return false
+
+        var newUser = new User (user)
+        try {
+            await newUser.save()
+            return true
+        } catch (error) {
+            return false
+        }
+    }
 }
 
 module.exports = new UserService()

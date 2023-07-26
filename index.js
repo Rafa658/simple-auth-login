@@ -32,6 +32,19 @@ app.get('/users', async (_, res) => {
 })
 app.get('/find', async(req, res) => {
     var user = {email: req.body.email, password: req.body.password}
-    var find = await UserService.FindOne(user)
-    res.send(find)
+    var stat = await UserService.FindOne(user)
+    res.send(stat)
+    res.status(200)
+})
+app.post('/user', async(req, res) => {
+    var user = {email: req.body.email, password: req.body.password}
+    var stat = await UserService.Add(user)
+    
+    if (stat) {
+        res.send("Successfully added user")
+        res.status(200)
+    } else {
+        res.send("Error adding user, please try again")
+        res.status(400)
+    }
 })
