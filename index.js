@@ -30,7 +30,7 @@ app.get('/users', async (_, res) => {
     res.send(results)
     res.status(200)
 })
-app.get('/find', async(req, res) => {
+app.post('/find', async(req, res) => {
     var user = {email: req.body.email, password: req.body.password}
     var stat = await UserService.FindOne(user)
     res.send(stat)
